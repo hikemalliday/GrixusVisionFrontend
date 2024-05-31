@@ -1,0 +1,4 @@
+-We installed npm install --save @types/react-table to help with TS types
+
+-helper.ts.sortColumn:
+    -We are using 'as any', not cool but cant seem to shake the linter error.

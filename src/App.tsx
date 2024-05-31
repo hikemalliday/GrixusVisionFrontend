@@ -1,12 +1,15 @@
 import "./App.css";
 import Header from "./components/Header";
 import TableView from "./components/TableView";
+import { ItemAndCharacterProvider } from "./context/ItemAndCharacterContext";
 
-function App() {
+function App(): React.JSX.Element {
   return (
     <>
-      <Header />
-      <TableView />
+      <ItemAndCharacterProvider>
+        <Header />
+        <TableView />
+      </ItemAndCharacterProvider>
     </>
   );
 }
