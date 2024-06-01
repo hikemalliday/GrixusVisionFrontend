@@ -5,7 +5,7 @@ import {
   useItemAndCharacterContext,
   type IItem,
 } from "../context/ItemAndCharacterContext";
-import { sortColumn } from "./helper";
+import { sortColumn } from "../helper";
 import { type ColumnName } from "../types";
 
 function TableView(): React.JSX.Element {
@@ -17,8 +17,7 @@ function TableView(): React.JSX.Element {
     itemLocation: false,
   });
 
-  const { itemsArray, setItemsArray, charactersArray, setCharactersArray } =
-    useItemAndCharacterContext();
+  const { itemsArray, setItemsArray } = useItemAndCharacterContext();
 
   const sortTable = (colName: ColumnName, data: IItem[]): void => {
     setSortDirections((prevSortDirections) => ({
@@ -93,28 +92,30 @@ function TableView(): React.JSX.Element {
           <thead>
             {headerGroups.map((headerGroup) => {
               return (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps()}
-                      onClick={() =>
-                        sortTable(column.render("Header"), itemsArray)
-                      }
-                    >
-                      {column.render("Header")}
-                    </th>
-                  ))}
+                <tr key={headerGroup.getHeaderGroupProps().key}>
+                  {headerGroup.headers.map((column) => {
+                    return (
+                      <th
+                        key={column.getHeaderProps().key}
+                        onClick={() =>
+                          sortTable(column.render("Header"), itemsArray)
+                        }
+                      >
+                        {column.render("Header")}
+                      </th>
+                    );
+                  })}
                 </tr>
               );
             })}
           </thead>
-          <tbody {...getTableBodyProps()}>
+          <tbody key={getTableBodyProps().key}>
             {page.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr key={row.getRowProps().key}>
                   {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td key={cell.getCellProps().key}>{cell.render("Cell")}</td>
                   ))}
                 </tr>
               );

@@ -1,5 +1,7 @@
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
+import CharacterDropdown from "./CharacterDropdown";
+
 function Header(): React.JSX.Element {
   return (
     <div className="header">
@@ -8,7 +10,9 @@ function Header(): React.JSX.Element {
       </div>
       <div className="search-bar">
         <SearchBar />
+        <CharacterDropdown />
       </div>
+      <div></div>
     </div>
   );
 }
