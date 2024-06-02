@@ -30,11 +30,11 @@ function TableView(): React.JSX.Element {
 
   const columns = useMemo(
     () => [
-      { Header: "charGuild", accessor: "charGuild" },
       { Header: "charName", accessor: "charName" },
       { Header: "itemName", accessor: "itemName" },
-      { Header: "itemCount", accessor: "itemCount" },
       { Header: "itemLocation", accessor: "itemLocation" },
+      { Header: "itemCount", accessor: "itemCount" },
+      { Header: "charGuild", accessor: "charGuild" },
     ],
     []
   );
@@ -60,16 +60,19 @@ function TableView(): React.JSX.Element {
     usePagination
   );
   const { pageIndex } = state;
+  if (itemsArray.length === 1) {
+    return (
+      <>
+        <div className="table-container">LOADING...</div>
+      </>
+    );
+  }
+
+  let counter = 0;
 
   return (
     <>
       <div className="table-container">
-        <div className="page-nums">
-          Page{" "}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
-        </div>
         <div className="page-buttons">
           <Button
             onClick={() => previousPage()}
@@ -88,6 +91,13 @@ function TableView(): React.JSX.Element {
             &gt;
           </Button>
         </div>
+        <div className="page-nums">
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </div>
+        <div>results: {itemsArray.length}</div>
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => {
@@ -112,8 +122,12 @@ function TableView(): React.JSX.Element {
           <tbody key={getTableBodyProps().key}>
             {page.map((row) => {
               prepareRow(row);
+              counter++;
               return (
-                <tr key={row.getRowProps().key}>
+                <tr
+                  key={row.getRowProps().key}
+                  className={counter % 2 == 0 ? "row-even" : "row-odd"}
+                >
                   {row.cells.map((cell) => (
                     <td key={cell.getCellProps().key}>{cell.render("Cell")}</td>
                   ))}

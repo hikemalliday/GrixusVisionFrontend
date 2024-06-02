@@ -4,15 +4,16 @@ import CharacterDropdown from "./CharacterDropdown";
 
 function Header(): React.JSX.Element {
   return (
-    <div className="header">
+    <div className="header-container">
       <div className="logo">
         <Logo />
       </div>
       <div className="search-bar">
         <SearchBar />
+      </div>
+      <div className="character-dropdown">
         <CharacterDropdown />
       </div>
-      <div></div>
     </div>
   );
 }

@@ -1,24 +1,25 @@
 import React, { KeyboardEventHandler } from "react";
 import TextField from "@mui/material/TextField";
 import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
+import { Input } from "@mui/material";
 
 function SearchBar(): React.JSX.Element {
   const { setSearchBarInput, handleQuery } = useItemAndCharacterContext();
-  const handleEnter: KeyboardEventHandler<HTMLDivElement> = (e) => {
+  const handleEnter: KeyboardEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = (e) => {
     if (e.key === "Enter") {
       handleQuery();
     }
   };
   return (
     <>
-      <TextField
-        size="small"
-        id="outlined-basic"
-        label="Item Search"
-        variant="outlined"
+      <Input
         fullWidth
+        placeholder="Search"
         onChange={(e) => setSearchBarInput(e.target.value)}
         onKeyDown={handleEnter}
+        sx={{ input: { color: "white", padding: "0" } }}
       />
     </>
   );

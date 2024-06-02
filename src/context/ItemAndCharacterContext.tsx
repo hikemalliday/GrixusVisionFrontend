@@ -6,8 +6,9 @@ import React, {
   type ReactElement,
   type ReactNode,
 } from "react";
-import { itemsArrayFixture, itemsArrayFixtureLarge } from "../fixtures";
+import { itemsArrayFixture } from "../fixtures";
 import { getCharNames, queryItems } from "../helper";
+import { getItems } from "../fetches";
 
 export interface IItem {
   charName: string;
@@ -39,10 +40,8 @@ export const ItemAndCharacterProvider = ({
 }: {
   children: ReactNode[] | ReactNode;
 }): ReactElement | null => {
-  const [itemsArrayMaster, setItemsArrayMaster] = useState(
-    itemsArrayFixtureLarge
-  );
-  const [itemsArray, setItemsArray] = useState(itemsArrayFixtureLarge);
+  const [itemsArrayMaster, setItemsArrayMaster] = useState(itemsArrayFixture);
+  const [itemsArray, setItemsArray] = useState(itemsArrayFixture);
   const [charactersArray, setCharactersArray] = useState(["ALL"]);
   const [characterDropdownSelect, setCharacterDropdownSelect] = useState("ALL");
   const [searchBarInput, setSearchBarInput] = useState("");
@@ -54,12 +53,21 @@ export const ItemAndCharacterProvider = ({
   };
 
   useEffect(() => {
-    setItemsArrayMaster(itemsArrayFixtureLarge);
-    setItemsArray(itemsArrayFixtureLarge);
-    setCharactersArray(getCharNames(itemsArray));
+    const fetchItems = async () => {
+      try {
+        const items = await getItems();
+        setItemsArrayMaster(items);
+        setItemsArray(items);
+        setCharactersArray(getCharNames(items)); // use itemsArrayFixtureLarge instead
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchItems();
   }, []);
 
-  // Deals with dropdown change to auto query
+  // Query on dropdown change
   useEffect(() => {
     handleQuery();
   }, [characterDropdownSelect]);

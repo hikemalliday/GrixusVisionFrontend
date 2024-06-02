@@ -43,7 +43,9 @@ export const queryItems = (
     });
   }
   newArray = newArray.filter((item) => {
-    return item.itemName.includes(searchBarInput);
+    return item.itemName
+      .toLowerCase()
+      .includes(searchBarInput.toLocaleLowerCase());
   });
   return newArray;
 };

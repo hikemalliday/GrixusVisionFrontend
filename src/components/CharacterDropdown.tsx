@@ -14,7 +14,23 @@ function CharacterDropdown(): React.JSX.Element {
       includeInputInList
       onChange={(_event, value) => handleChange(value as string)}
       renderInput={(params) => (
-        <TextField {...params} label="characters" variant="standard" />
+        <TextField
+          {...params}
+          label="characters"
+          variant="standard"
+          InputLabelProps={{
+            style: { color: "white", padding: 0, margin: 0 },
+          }}
+          sx={{
+            input: {
+              color: "white",
+              padding: "0",
+              fontSize: "smaller",
+              display: "flex",
+              alignItems: "flex-end",
+            },
+          }}
+        />
       )}
     />
   );
