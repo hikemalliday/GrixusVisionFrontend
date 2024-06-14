@@ -13,7 +13,7 @@ const component = (
 describe("SearchBar tests", () => {
   it("renders SearchBar component", async () => {
     const { getByRole, getByDisplayValue } = render(component);
-    const searchBar = getByRole("textbox", { name: "Item Search" });
+    const searchBar = getByRole("textbox");
     act(() => {
       fireEvent.change(searchBar, { target: { value: "test" } });
     });

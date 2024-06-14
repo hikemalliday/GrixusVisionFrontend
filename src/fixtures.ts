@@ -1,10 +1,10 @@
 export const itemsArrayFixture = [
   {
-    charName: "This",
-    charGuild: "is",
+    charName: "Wait",
+    itemLocation: "a",
     itemName: "just",
-    itemCount: "1",
-    itemLocation: "Test",
+    itemCount: "moment",
+    charGuild: "please!",
   },
 ];
 

@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { itemsArrayFixture } from "../fixtures";
 import { getCharNames, queryItems } from "../helper";
-import { getItems } from "../fetches";
+
 
 export interface IItem {
   charName: string;
@@ -51,21 +51,6 @@ export const ItemAndCharacterProvider = ({
       queryItems(characterDropdownSelect, searchBarInput, itemsArrayMaster)
     );
   };
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const items = await getItems();
-        setItemsArrayMaster(items);
-        setItemsArray(items);
-        setCharactersArray(getCharNames(items)); // use itemsArrayFixtureLarge instead
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
-
-    fetchItems();
-  }, []);
 
   // Query on dropdown change
   useEffect(() => {

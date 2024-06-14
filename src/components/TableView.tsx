@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import {
   useItemAndCharacterContext,
@@ -7,6 +7,9 @@ import {
 } from "../context/ItemAndCharacterContext";
 import { sortColumn } from "../helper";
 import { type ColumnName } from "../types";
+import { getItems } from "../requests/fetches";
+import { getCharNames, queryItems } from "../helper";
+import { useAuthContext } from "../context/AuthContext";
 
 function TableView(): React.JSX.Element {
   const [sortDirections, setSortDirections] = useState({
@@ -17,7 +20,24 @@ function TableView(): React.JSX.Element {
     itemLocation: false,
   });
 
-  const { itemsArray, setItemsArray } = useItemAndCharacterContext();
+  const { itemsArray, setItemsArray, setItemsArrayMaster, setCharactersArray } =
+    useItemAndCharacterContext();
+  const { accessToken } = useAuthContext();
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const items = await getItems(accessToken);
+        setItemsArrayMaster(items);
+        setItemsArray(items);
+        setCharactersArray(getCharNames(items)); // use itemsArrayFixtureLarge instead
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   const sortTable = (colName: ColumnName, data: IItem[]): void => {
     setSortDirections((prevSortDirections) => ({
@@ -60,15 +80,16 @@ function TableView(): React.JSX.Element {
     usePagination
   );
   const { pageIndex } = state;
-  if (itemsArray.length === 1) {
-    return (
-      <>
-        <div className="table-container">LOADING...</div>
-      </>
-    );
-  }
+  // if (itemsArray.length === 1) {
+  //   return (
+  //     <>
+  //       <div className="table-container">LOADING...</div>
+  //     </>
+  //   );
+  // }
 
   let counter = 0;
+  console.log("RENDER TEST!");
 
   return (
     <>

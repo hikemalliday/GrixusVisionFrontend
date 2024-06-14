@@ -6,11 +6,15 @@ import { ItemAndCharacterProvider } from "../../context/ItemAndCharacterContext"
 
 describe("TableView tests", () => {
   it("renders fixture data into table", () => {
-    const { queryAllByText } = render(
+    const { getByText } = render(
       <ItemAndCharacterProvider>
         <TableView />
       </ItemAndCharacterProvider>
     );
-    expect(queryAllByText("Abashi")[0]).toBeInTheDocument();
+    expect(getByText("Wait")).toBeInTheDocument();
+    expect(getByText("just")).toBeInTheDocument();
+    expect(getByText("a")).toBeInTheDocument();
+    expect(getByText("moment")).toBeInTheDocument();
+    expect(getByText("please!")).toBeInTheDocument();
   });
 });
