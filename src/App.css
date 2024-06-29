@@ -31,6 +31,21 @@
 .logo img {
   width: 50px;
   height: 50px;
+  cursor: pointer;
+}
+
+.logout-link {
+  margin-top: 22px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logout-link:hover {
+  color: chartreuse;
+}
+
+.logout-link:active {
+  color: rgb(95, 173, 17);
 }
 
 .search-bar {
@@ -48,6 +63,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .row-even {

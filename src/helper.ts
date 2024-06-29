@@ -21,6 +21,7 @@ export const sortColumn = (
 };
 
 export const getCharNames = (items: IItem[]) => {
+  if (items === undefined) return [];
   const charNamesSet: Set<string> = new Set();
   for (const item of items) {
     charNamesSet.add(item["charName"]);

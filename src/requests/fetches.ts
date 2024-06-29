@@ -1,75 +1,46 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { BACKEND_URL_DEV, BACKEND_URL_PROD } from "../../config.ts";
+import { useAxiosInstance } from "../hooks/useAxios.ts";
+import { useRequest } from "../hooks/useRequest.ts";
+import { type IUseRequestHook } from "../hooks/useRequest.ts";
+import { IItem } from "../context/ItemAndCharacterContext.tsx";
+import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 
-export const axiosInstance = axios.create({
-  baseURL: BACKEND_URL_DEV,
-});
-
-export const axiosPrivate = axios.create({
-  baseURL: BACKEND_URL_DEV,
-  headers: { "Content-Type": "application/json" },
-});
-
-export const loginFetch = async (
-  payload: object
-): Promise<AxiosResponse | undefined> => {
-  try {
-    const response = await axios.post("http://127.0.0.1:8000/login", payload, {
+export const useLogin = (): IUseRequestHook<AxiosResponse> => {
+  const axiosInstance = useAxiosInstance(BACKEND_URL_DEV, false, true);
+  const requestHandler = async (payload: object) => {
+    return await axiosInstance.post("/login", payload, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     });
-    if (response !== undefined) {
-      return response;
-    }
-  } catch (err) {
-    console.log(err);
-  }
+  };
+  return useRequest(requestHandler, false);
 };
 
-export const createUser = async (
-  payload: object
-): Promise<AxiosResponse | undefined> => {
-  try {
-    const response = await axios.post(
-      "http://127.0.0.1:8000/create_user",
-      payload
-    );
-    if (response !== undefined) {
-      return response;
-    }
-  } catch (err) {
-    console.log(err);
-  }
+export const useCreateUser = (): IUseRequestHook<AxiosResponse> => {
+  const axiosInstance = useAxiosInstance(BACKEND_URL_DEV);
+  const requestHandler = async (payload: object) => {
+    return await axiosInstance.post("/create_user", payload);
+  };
+  return useRequest(requestHandler, false);
 };
 
-axiosPrivate.interceptors.request.use(
-  (request) => {
-    console.log("Starting Request", request);
-    return request;
-  },
-  (error) => {
-    console.error("Request error", error);
-    return Promise.reject(error);
-  }
-);
+export const useItems = (): IUseRequestHook<IItem[]> => {
+  const axiosInstance = useAxiosInstance(BACKEND_URL_DEV);
+  const requestHandler = async () => {
+    return await axiosInstance.get("/get_items");
+  };
+  return useRequest(requestHandler, true);
+};
 
-export const getItems = async (token: string) => {
-  console.log("TOKEN:");
-  console.log(token);
-  try {
-    const response = await axiosPrivate({
-      method: "get",
-      url: `${BACKEND_URL_DEV}get_items`,
-      headers: {
-        "x-custom": `Bearer ${token}`,
-      },
+export const useRefresh = (): IUseRequestHook<AxiosResponse> => {
+  const { refreshToken } = useLocalStorage();
+  const axiosInstance = useAxiosInstance(BACKEND_URL_DEV, true, true);
+  const requestHandler = async () => {
+    return await axiosInstance.post("/refresh", {
+      refresh_token: refreshToken,
     });
-    if (response !== null) {
-      console.log(response.data);
-      return response.data;
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  };
+  return useRequest(requestHandler, false);
 };

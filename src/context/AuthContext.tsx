@@ -3,21 +3,24 @@ import React, {
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
+import { expireKey, useLocalStorage } from "../hooks/useLocalStorage";
+
 export interface IAuthUser {
-  username: string;
-  password: string;
+  username?: string;
+  password?: string;
   access_token: string;
+  refresh_token: string | null;
 }
 
 export interface IAuthContextType {
   authUser: IAuthUser | null;
-  accessToken: string;
-  setAccessToken: React.Dispatch<React.SetStateAction<string>>;
   login: CallableFunction;
   logout: CallableFunction;
+  isLoading: boolean;
 }
 
 export const AuthContext = createContext<IAuthContextType | null>(null);
@@ -28,10 +31,39 @@ export const AuthContextProvider = ({
   children: ReactNode[] | ReactNode;
 }): ReactElement | null => {
   const [authUser, setAuthUser] = useState<IAuthUser | null>(null);
-  const [accessToken, setAccessToken] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const {
+    accessToken,
+    refreshToken,
+    setAccessToken,
+    setRefreshToken,
+    isTokenExpired,
+    clear,
+  } = useLocalStorage();
+
+  useEffect(() => {
+    if (isTokenExpired(expireKey)) {
+      console.log("AuthContext.useEffect: if (istokenExpired(expireKey))");
+      clear();
+      setAuthUser(null);
+      setIsLoading(false);
+      return;
+    }
+    if (accessToken !== null) {
+      console.log("AuthContext.useEffect: if (accessToken !== null)");
+      const userData: IAuthUser = {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+      };
+      console.log("Authcontext.useEffect.userData:");
+      console.log(userData);
+      setAuthUser(userData);
+    }
+  }, []);
 
   const login = (userData: IAuthUser): void => {
-    setAccessToken(userData.access_token);
+    setAccessToken(userData.access_token ?? "");
+    setRefreshToken(userData.refresh_token ?? "");
     setAuthUser(userData);
   };
 
@@ -44,10 +76,9 @@ export const AuthContextProvider = ({
     <AuthContext.Provider
       value={{
         authUser,
-        accessToken,
-        setAccessToken,
         login,
         logout,
+        isLoading,
       }}
     >
       {children}

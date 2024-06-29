@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
-interface IUseRequestHook<T> {
+export interface IUseRequestHook<T> {
   action: (payload: T) => Promise<T>;
   error: AxiosError | null;
   isLoading: boolean;
@@ -9,10 +9,7 @@ interface IUseRequestHook<T> {
   success: boolean;
 }
 
-export function useRequest<T>(
-  requestHandler: CallableFunction,
-  act = false
-): IUseRequestHook<T> {
+export function useRequest<T>(requestHandler: CallableFunction, act = false) {
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);

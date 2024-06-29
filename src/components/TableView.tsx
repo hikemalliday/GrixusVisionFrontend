@@ -7,11 +7,11 @@ import {
 } from "../context/ItemAndCharacterContext";
 import { sortColumn } from "../helper";
 import { type ColumnName } from "../types";
-import { getItems } from "../requests/fetches";
-import { getCharNames, queryItems } from "../helper";
-import { useAuthContext } from "../context/AuthContext";
+import { useItems } from "../requests/fetches";
+import { getCharNames } from "../helper";
 
 function TableView(): React.JSX.Element {
+  const { response, isLoading } = useItems();
   const [sortDirections, setSortDirections] = useState({
     charName: false,
     charGuild: false,
@@ -22,22 +22,12 @@ function TableView(): React.JSX.Element {
 
   const { itemsArray, setItemsArray, setItemsArrayMaster, setCharactersArray } =
     useItemAndCharacterContext();
-  const { accessToken } = useAuthContext();
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const items = await getItems(accessToken);
-        setItemsArrayMaster(items);
-        setItemsArray(items);
-        setCharactersArray(getCharNames(items)); // use itemsArrayFixtureLarge instead
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
-
-    fetchItems();
-  }, []);
+    setItemsArrayMaster(response.data || []);
+    setItemsArray(response.data || []);
+    setCharactersArray(getCharNames(response.data) || []);
+  }, [response]);
 
   const sortTable = (colName: ColumnName, data: IItem[]): void => {
     setSortDirections((prevSortDirections) => ({
@@ -80,16 +70,18 @@ function TableView(): React.JSX.Element {
     usePagination
   );
   const { pageIndex } = state;
-  // if (itemsArray.length === 1) {
-  //   return (
-  //     <>
-  //       <div className="table-container">LOADING...</div>
-  //     </>
-  //   );
-  // }
 
   let counter = 0;
-  console.log("RENDER TEST!");
+  if (isLoading)
+    return (
+      <>
+        Loading... Loading... Loading... Loading... Loading... Loading...
+        Loading... Loading... Loading... Loading... Loading... Loading...
+        Loading... Loading... Loading... Loading... Loading... Loading...
+        Loading... Loading... Loading... Loading... Loading... Loading...
+        Loading... Loading... Loading... Loading... Loading... Loading...
+      </>
+    );
 
   return (
     <>

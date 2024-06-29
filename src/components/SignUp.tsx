@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { signInInputStyles, signInButtonStyles } from "./style";
 import { Button, TextField, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
-import { createUser } from "../requests/fetches";
+import { useCreateUser } from "../requests/fetches";
 
 export function SignUp(): React.JSX.Element {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([""]);
+  const { action } = useCreateUser();
   //const { action: tokenAction } = useApiToken();
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
@@ -27,7 +28,7 @@ export function SignUp(): React.JSX.Element {
     if (newErrors.length === 0) {
       console.log("Form submitted!");
       try {
-        const response = (await createUser({
+        const response = (await action({
           username,
           password,
         })) as AxiosResponse;

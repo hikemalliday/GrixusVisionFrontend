@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { signInInputStyles, signInButtonStyles } from "./style";
 import { Button, TextField, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
-import { loginFetch, createUser } from "../requests/fetches";
+import { useLogin } from "../requests/fetches";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export function Login(): React.JSX.Element {
+  const { action } = useLogin();
+  const { login } = useAuthContext();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([""]);
-  const { login } = useAuthContext();
-  const navigate = useNavigate();
   //const { action: tokenAction } = useApiToken();
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
@@ -29,9 +30,8 @@ export function Login(): React.JSX.Element {
     setErrors(newErrors);
 
     if (newErrors.length === 0) {
-      console.log("Form submitted!");
       try {
-        const response = (await loginFetch({
+        const response = (await action({
           username,
           password,
         })) as AxiosResponse;
@@ -39,7 +39,8 @@ export function Login(): React.JSX.Element {
         const userData = response?.data;
         login(userData);
         navigate("/home");
-      } catch {
+      } catch (err) {
+        console.error(err);
         console.log("Error during login");
         navigate("/login");
         return;
