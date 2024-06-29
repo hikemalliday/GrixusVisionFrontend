@@ -3,15 +3,18 @@ import SearchBar from "./SearchBar";
 import CharacterDropdown from "./CharacterDropdown";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
 //import { useRefresh } from "../requests/fetches";
 //import { AxiosResponse } from "axios";
 
 function Header(): React.JSX.Element {
   const navigate = useNavigate();
   const { logout } = useAuthContext();
+  const { resetItemsArray, dbFile } = useItemAndCharacterContext();
   //const { action: refreshAction } = useRefresh();
   const handleLogout = (): void => {
     logout();
+    resetItemsArray();
     navigate("/login");
   };
   // const handleRefresh = async (payload: object = { testkey: "testval" }) => {
@@ -35,6 +38,7 @@ function Header(): React.JSX.Element {
       >
         LOG OUT
       </div>
+      <div>{dbFile}</div>
       {/* <div
         className="logout-link"
         onClick={() => {

@@ -29,6 +29,9 @@ export interface IItemAndCharacterContextType {
   searchBarInput: string;
   setSearchBarInput: React.Dispatch<React.SetStateAction<string>>;
   handleQuery: CallableFunction;
+  resetItemsArray: CallableFunction;
+  dbFile: string;
+  setDbFile: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ItemAndCharacterContext =
@@ -44,11 +47,16 @@ export const ItemAndCharacterProvider = ({
   const [charactersArray, setCharactersArray] = useState(["ALL"]);
   const [characterDropdownSelect, setCharacterDropdownSelect] = useState("ALL");
   const [searchBarInput, setSearchBarInput] = useState("");
+  const [dbFile, setDbFile] = useState("");
 
   const handleQuery = () => {
     setItemsArray(
       queryItems(characterDropdownSelect, searchBarInput, itemsArrayMaster)
     );
+  };
+
+  const resetItemsArray = (): void => {
+    setItemsArray([...itemsArrayMaster]);
   };
 
   // Query on dropdown change
@@ -70,6 +78,9 @@ export const ItemAndCharacterProvider = ({
         searchBarInput,
         setSearchBarInput,
         handleQuery,
+        resetItemsArray,
+        dbFile,
+        setDbFile,
       }}
     >
       {children}

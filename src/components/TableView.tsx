@@ -20,13 +20,19 @@ function TableView(): React.JSX.Element {
     itemLocation: false,
   });
 
-  const { itemsArray, setItemsArray, setItemsArrayMaster, setCharactersArray } =
-    useItemAndCharacterContext();
+  const {
+    itemsArray,
+    setItemsArray,
+    setItemsArrayMaster,
+    setCharactersArray,
+    setDbFile,
+  } = useItemAndCharacterContext();
 
   useEffect(() => {
-    setItemsArrayMaster(response.data || []);
-    setItemsArray(response.data || []);
-    setCharactersArray(getCharNames(response.data) || []);
+    setItemsArrayMaster(response?.data?.items || []);
+    setItemsArray(response?.data?.items || []);
+    setCharactersArray(getCharNames(response?.data?.items) || []);
+    setDbFile(response?.data?.dbFile);
   }, [response]);
 
   const sortTable = (colName: ColumnName, data: IItem[]): void => {
@@ -82,6 +88,8 @@ function TableView(): React.JSX.Element {
         Loading... Loading... Loading... Loading... Loading... Loading...
       </>
     );
+
+  console.log(response);
 
   return (
     <>
