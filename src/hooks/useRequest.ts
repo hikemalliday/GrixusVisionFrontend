@@ -21,6 +21,8 @@ export function useRequest<T>(requestHandler: CallableFunction, act = false) {
     let resp;
     try {
       resp = (await requestHandler(payload)) as AxiosResponse;
+      console.log("RESP");
+      console.log(resp);
       setResponse(resp);
       setSuccess(true);
     } catch (error: unknown) {
