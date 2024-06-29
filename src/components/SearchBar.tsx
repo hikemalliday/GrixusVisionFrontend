@@ -1,5 +1,4 @@
 import React, { KeyboardEventHandler } from "react";
-import TextField from "@mui/material/TextField";
 import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
 import { Input } from "@mui/material";
 

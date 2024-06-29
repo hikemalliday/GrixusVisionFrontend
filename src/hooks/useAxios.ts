@@ -44,6 +44,7 @@ export const useAxiosInstance = (
           originalRequest.headers.authorization = `Bearer ${data.access_token}`;
           return await axiosInstance(originalRequest);
         } catch (error) {
+          // @ts-ignore
           if (error?.response?.status === 401) {
             navigate("/login");
           }

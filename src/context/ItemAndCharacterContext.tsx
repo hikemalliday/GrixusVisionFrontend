@@ -7,8 +7,7 @@ import React, {
   type ReactNode,
 } from "react";
 import { itemsArrayFixture } from "../fixtures";
-import { getCharNames, queryItems } from "../helper";
-
+import { queryItems } from "../helper";
 
 export interface IItem {
   charName: string;

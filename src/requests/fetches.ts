@@ -1,12 +1,12 @@
 import { AxiosResponse } from "axios";
-import { BACKEND_URL_DEV, BACKEND_URL_PROD } from "../../config.ts";
+import { BACKEND_URL_DEV } from "../../config.ts";
 import { useAxiosInstance } from "../hooks/useAxios.ts";
 import { useRequest } from "../hooks/useRequest.ts";
 import { type IUseRequestHook } from "../hooks/useRequest.ts";
 import { IItem } from "../context/ItemAndCharacterContext.tsx";
 import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 
-export const useLogin = (): IUseRequestHook<AxiosResponse> => {
+export const useLogin = (): IUseRequestHook<unknown> => {
   const axiosInstance = useAxiosInstance(BACKEND_URL_DEV, false, true);
   const requestHandler = async (payload: object) => {
     return await axiosInstance.post("/login", payload, {
@@ -18,7 +18,7 @@ export const useLogin = (): IUseRequestHook<AxiosResponse> => {
   return useRequest(requestHandler, false);
 };
 
-export const useCreateUser = (): IUseRequestHook<AxiosResponse> => {
+export const useCreateUser = (): IUseRequestHook<unknown> => {
   const axiosInstance = useAxiosInstance(BACKEND_URL_DEV);
   const requestHandler = async (payload: object) => {
     return await axiosInstance.post("/create_user", payload);
