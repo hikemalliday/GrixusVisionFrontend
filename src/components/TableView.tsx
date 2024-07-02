@@ -9,6 +9,7 @@ import { sortColumn } from "../helper";
 import { type ColumnName } from "../types";
 import { useItems } from "../requests/fetches";
 import { getCharNames } from "../helper";
+import { ClipLoader } from "react-spinners";
 
 function TableView(): React.JSX.Element {
   const { response, isLoading } = useItems();
@@ -76,16 +77,12 @@ function TableView(): React.JSX.Element {
     usePagination
   );
   const { pageIndex } = state;
-
+  console.log(`isLoading: ${isLoading}`);
   let counter = 0;
   if (isLoading)
     return (
       <>
-        Loading... Loading... Loading... Loading... Loading... Loading...
-        Loading... Loading... Loading... Loading... Loading... Loading...
-        Loading... Loading... Loading... Loading... Loading... Loading...
-        Loading... Loading... Loading... Loading... Loading... Loading...
-        Loading... Loading... Loading... Loading... Loading... Loading...
+        <ClipLoader loading={isLoading} />
       </>
     );
 
