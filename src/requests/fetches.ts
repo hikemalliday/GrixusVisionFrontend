@@ -9,6 +9,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 export const useLogin = (): IUseRequestHook<unknown> => {
   const axiosInstance = useAxiosInstance(API_URL, false, true);
   const requestHandler = async (payload: object) => {
+    console.log("useLogin test");
     return await axiosInstance.post("/login", payload, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

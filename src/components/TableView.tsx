@@ -89,8 +89,6 @@ function TableView(): React.JSX.Element {
       </>
     );
 
-  console.log(response);
-
   return (
     <>
       <div className="table-container">

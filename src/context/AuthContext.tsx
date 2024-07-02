@@ -43,20 +43,16 @@ export const AuthContextProvider = ({
 
   useEffect(() => {
     if (isTokenExpired(expireKey)) {
-      console.log("AuthContext.useEffect: if (istokenExpired(expireKey))");
       clear();
       setAuthUser(null);
       setIsLoading(false);
       return;
     }
     if (accessToken !== null) {
-      console.log("AuthContext.useEffect: if (accessToken !== null)");
       const userData: IAuthUser = {
         access_token: accessToken,
         refresh_token: refreshToken,
       };
-      console.log("Authcontext.useEffect.userData:");
-      console.log(userData);
       setAuthUser(userData);
     }
   }, []);
