@@ -77,7 +77,6 @@ function TableView(): React.JSX.Element {
     usePagination
   );
   const { pageIndex } = state;
-  console.log(`isLoading: ${isLoading}`);
   let counter = 0;
   if (isLoading)
     return (
