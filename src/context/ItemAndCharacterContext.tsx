@@ -32,6 +32,7 @@ export interface IItemAndCharacterContextType {
   resetItemsArray: CallableFunction;
   dbFile: string;
   setDbFile: React.Dispatch<React.SetStateAction<string>>;
+  handleQueryParams: CallableFunction;
 }
 
 export const ItemAndCharacterContext =
@@ -59,6 +60,20 @@ export const ItemAndCharacterProvider = ({
     setItemsArray([...itemsArrayMaster]);
   };
 
+  const handleQueryParams = (): void => {
+    const params = new URLSearchParams(location.search);
+    if (searchBarInput) {
+      params.set("itemName", searchBarInput);
+    } else {
+      params.delete("itemName");
+    }
+    if (characterDropdownSelect) {
+      params.set("charName", characterDropdownSelect);
+    } else {
+      params.delete("charName");
+    }
+  };
+
   // Query on dropdown change
   useEffect(() => {
     handleQuery();
@@ -81,6 +96,7 @@ export const ItemAndCharacterProvider = ({
         resetItemsArray,
         dbFile,
         setDbFile,
+        handleQueryParams,
       }}
     >
       {children}

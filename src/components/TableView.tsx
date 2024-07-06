@@ -78,12 +78,12 @@ function TableView(): React.JSX.Element {
   );
   const { pageIndex } = state;
   let counter = 0;
-  if (isLoading)
-    return (
-      <>
-        <ClipLoader loading={isLoading} />
-      </>
-    );
+  // if (isLoading)
+  //   return (
+  //     <>
+  //       <ClipLoader loading={isLoading} />
+  //     </>
+  //   );
 
   return (
     <>
