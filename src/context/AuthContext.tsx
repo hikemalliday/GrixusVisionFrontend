@@ -48,12 +48,14 @@ export const AuthContextProvider = ({
       setIsLoading(false);
       return;
     }
-    if (accessToken !== null) {
+    if (accessToken && refreshToken) {
       const userData: IAuthUser = {
         access_token: accessToken,
         refresh_token: refreshToken,
       };
       setAuthUser(userData);
+      setIsLoading(false);
+      return;
     }
   }, []);
 

@@ -5,12 +5,10 @@ import { useRequest } from "../hooks/useRequest.ts";
 import { type IUseRequestHook } from "../hooks/useRequest.ts";
 import { IItem } from "../context/ItemAndCharacterContext.tsx";
 import { useLocalStorage } from "../hooks/useLocalStorage.ts";
-import { useSearchParams, useLocation } from "react-router-dom";
 
 export const useLogin = (): IUseRequestHook<unknown> => {
-  const axiosInstance = useAxiosInstance(API_URL, false, true);
+  const axiosInstance = useAxiosInstance(API_URL, false);
   const requestHandler = async (payload: object) => {
-    console.log("useLogin test");
     return await axiosInstance.post("/login", payload, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -31,15 +29,6 @@ export const useCreateUser = (): IUseRequestHook<unknown> => {
 export const useItems = (): IUseRequestHook<IItem[]> => {
   const axiosInstance = useAxiosInstance(API_URL);
   const requestHandler = async (params: object) => {
-    console.log("TEST ACTION0");
-    console.log("params");
-    console.log(params);
-    // const query = `/get_items?${params}`;
-    // const query =
-    //   params.queryParams != ""
-    //     ? `/get_items?${params.queryParams}`
-    //     : "/get_items";
-
     return await axiosInstance.get(`/get_items`, {
       params,
     });
@@ -49,11 +38,19 @@ export const useItems = (): IUseRequestHook<IItem[]> => {
 
 export const useRefresh = (): IUseRequestHook<AxiosResponse> => {
   const { refreshToken } = useLocalStorage();
-  const axiosInstance = useAxiosInstance(API_URL, true, true);
+  const axiosInstance = useAxiosInstance(API_URL, true);
   const requestHandler = async () => {
     return await axiosInstance.post("/refresh", {
       refresh_token: refreshToken,
     });
   };
   return useRequest(requestHandler, false);
+};
+
+export const useCharNames = (): IUseRequestHook<AxiosResponse> => {
+  const axiosInstance = useAxiosInstance(API_URL);
+  const requestHandler = async () => {
+    return await axiosInstance.get("/get_char_names");
+  };
+  return useRequest(requestHandler, true);
 };

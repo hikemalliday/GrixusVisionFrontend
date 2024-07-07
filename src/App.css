@@ -58,12 +58,17 @@
 }
 
 .table-container {
-  margin-top: 75px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+
+.table-container th,
+.table-container td {
+  text-align: center;
+  min-width: 120px; /* Adjust this value to accommodate your longest column content */
 }
 
 .row-even {
@@ -113,4 +118,13 @@
   position: absolute;
   top: 50%;
   left: 40%;
+}
+
+.pagination-metadata {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-results {
+  margin-top: 100px;
 }

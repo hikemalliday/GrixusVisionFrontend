@@ -26,13 +26,17 @@ export interface IItemAndCharacterContextType {
   setCharactersArray: React.Dispatch<React.SetStateAction<string[]>>;
   characterDropdownSelect: string;
   setCharacterDropdownSelect: React.Dispatch<React.SetStateAction<string>>;
+  characterDropdownPagination: string;
+  setCharacterDropdownPagination: React.Dispatch<React.SetStateAction<string>>;
   searchBarInput: string;
   setSearchBarInput: React.Dispatch<React.SetStateAction<string>>;
+  searchBarInputPagination: string;
+  setSearchBarInputPagination: React.Dispatch<React.SetStateAction<string>>;
   handleQuery: CallableFunction;
+  handleQueryPagination: CallableFunction;
   resetItemsArray: CallableFunction;
   dbFile: string;
   setDbFile: React.Dispatch<React.SetStateAction<string>>;
-  handleQueryParams: CallableFunction;
 }
 
 export const ItemAndCharacterContext =
@@ -49,6 +53,9 @@ export const ItemAndCharacterProvider = ({
   const [characterDropdownSelect, setCharacterDropdownSelect] = useState("ALL");
   const [searchBarInput, setSearchBarInput] = useState("");
   const [dbFile, setDbFile] = useState("");
+  const [searchBarInputPagination, setSearchBarInputPagination] = useState("");
+  const [characterDropdownPagination, setCharacterDropdownPagination] =
+    useState("ALL");
 
   const handleQuery = () => {
     setItemsArray(
@@ -56,22 +63,13 @@ export const ItemAndCharacterProvider = ({
     );
   };
 
-  const resetItemsArray = (): void => {
-    setItemsArray([...itemsArrayMaster]);
+  const handleQueryPagination = () => {
+    setCharacterDropdownPagination(characterDropdownSelect);
+    setSearchBarInputPagination(searchBarInput);
   };
 
-  const handleQueryParams = (): void => {
-    const params = new URLSearchParams(location.search);
-    if (searchBarInput) {
-      params.set("itemName", searchBarInput);
-    } else {
-      params.delete("itemName");
-    }
-    if (characterDropdownSelect) {
-      params.set("charName", characterDropdownSelect);
-    } else {
-      params.delete("charName");
-    }
+  const resetItemsArray = (): void => {
+    setItemsArray([...itemsArrayMaster]);
   };
 
   // Query on dropdown change
@@ -93,10 +91,14 @@ export const ItemAndCharacterProvider = ({
         searchBarInput,
         setSearchBarInput,
         handleQuery,
+        handleQueryPagination,
         resetItemsArray,
         dbFile,
         setDbFile,
-        handleQueryParams,
+        searchBarInputPagination,
+        setSearchBarInputPagination,
+        characterDropdownPagination,
+        setCharacterDropdownPagination,
       }}
     >
       {children}
