@@ -7,9 +7,8 @@ import { IItem } from "../context/ItemAndCharacterContext.tsx";
 import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 
 export const useLogin = (): IUseRequestHook<unknown> => {
-  const axiosInstance = useAxiosInstance(API_URL, false, true);
+  const axiosInstance = useAxiosInstance(API_URL, false);
   const requestHandler = async (payload: object) => {
-    console.log("useLogin test");
     return await axiosInstance.post("/login", payload, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -29,19 +28,29 @@ export const useCreateUser = (): IUseRequestHook<unknown> => {
 
 export const useItems = (): IUseRequestHook<IItem[]> => {
   const axiosInstance = useAxiosInstance(API_URL);
-  const requestHandler = async () => {
-    return await axiosInstance.get("/get_items");
+  const requestHandler = async (params: object) => {
+    return await axiosInstance.get(`/get_items`, {
+      params,
+    });
   };
-  return useRequest(requestHandler, true);
+  return useRequest(requestHandler, false);
 };
 
 export const useRefresh = (): IUseRequestHook<AxiosResponse> => {
   const { refreshToken } = useLocalStorage();
-  const axiosInstance = useAxiosInstance(API_URL, true, true);
+  const axiosInstance = useAxiosInstance(API_URL, true);
   const requestHandler = async () => {
     return await axiosInstance.post("/refresh", {
       refresh_token: refreshToken,
     });
   };
   return useRequest(requestHandler, false);
+};
+
+export const useCharNames = (): IUseRequestHook<AxiosResponse> => {
+  const axiosInstance = useAxiosInstance(API_URL);
+  const requestHandler = async () => {
+    return await axiosInstance.get("/get_char_names");
+  };
+  return useRequest(requestHandler, true);
 };

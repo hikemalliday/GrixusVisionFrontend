@@ -3,12 +3,13 @@ import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
 import { Input } from "@mui/material";
 
 function SearchBar(): React.JSX.Element {
-  const { setSearchBarInput, handleQuery } = useItemAndCharacterContext();
+  const { setSearchBarInput, handleQueryPagination } =
+    useItemAndCharacterContext();
   const handleEnter: KeyboardEventHandler<
     HTMLTextAreaElement | HTMLInputElement
   > = (e) => {
     if (e.key === "Enter") {
-      handleQuery();
+      handleQueryPagination();
     }
   };
   return (

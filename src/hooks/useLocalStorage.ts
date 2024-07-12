@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 interface ILocalStorageHook {
@@ -61,6 +61,14 @@ export function useLocalStorage(): ILocalStorageHook {
   const setRefreshToken = (newVal: string): void => {
     set(storageKeys.refreshToken, newVal);
   };
+
+  useEffect(() => {
+    if (accessToken && refreshToken) {
+      setAccessToken(accessToken);
+      setRefreshToken(refreshToken);
+    }
+  }, []);
+
   return {
     accessToken,
     clear,

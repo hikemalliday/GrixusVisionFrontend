@@ -26,9 +26,14 @@ export interface IItemAndCharacterContextType {
   setCharactersArray: React.Dispatch<React.SetStateAction<string[]>>;
   characterDropdownSelect: string;
   setCharacterDropdownSelect: React.Dispatch<React.SetStateAction<string>>;
+  characterDropdownPagination: string;
+  setCharacterDropdownPagination: React.Dispatch<React.SetStateAction<string>>;
   searchBarInput: string;
   setSearchBarInput: React.Dispatch<React.SetStateAction<string>>;
+  searchBarInputPagination: string;
+  setSearchBarInputPagination: React.Dispatch<React.SetStateAction<string>>;
   handleQuery: CallableFunction;
+  handleQueryPagination: CallableFunction;
   resetItemsArray: CallableFunction;
   dbFile: string;
   setDbFile: React.Dispatch<React.SetStateAction<string>>;
@@ -48,11 +53,19 @@ export const ItemAndCharacterProvider = ({
   const [characterDropdownSelect, setCharacterDropdownSelect] = useState("ALL");
   const [searchBarInput, setSearchBarInput] = useState("");
   const [dbFile, setDbFile] = useState("");
+  const [searchBarInputPagination, setSearchBarInputPagination] = useState("");
+  const [characterDropdownPagination, setCharacterDropdownPagination] =
+    useState("ALL");
 
   const handleQuery = () => {
     setItemsArray(
       queryItems(characterDropdownSelect, searchBarInput, itemsArrayMaster)
     );
+  };
+
+  const handleQueryPagination = () => {
+    setCharacterDropdownPagination(characterDropdownSelect);
+    setSearchBarInputPagination(searchBarInput);
   };
 
   const resetItemsArray = (): void => {
@@ -78,9 +91,14 @@ export const ItemAndCharacterProvider = ({
         searchBarInput,
         setSearchBarInput,
         handleQuery,
+        handleQueryPagination,
         resetItemsArray,
         dbFile,
         setDbFile,
+        searchBarInputPagination,
+        setSearchBarInputPagination,
+        characterDropdownPagination,
+        setCharacterDropdownPagination,
       }}
     >
       {children}
