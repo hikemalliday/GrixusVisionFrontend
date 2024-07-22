@@ -63,7 +63,7 @@ export function Login(): React.JSX.Element {
           marginBottom: "100px",
         }}
       >
-        TEST CI PLEASE SIGN IN
+        PLEASE SIGN IN
       </Typography>
       <TextField
         sx={signInInputStyles}
