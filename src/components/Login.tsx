@@ -38,7 +38,7 @@ export function Login(): React.JSX.Element {
 
         const userData = response?.data;
         login(userData);
-        navigate("/home");
+        navigate("/");
       } catch (err) {
         console.error(err);
         console.log("Error during login");

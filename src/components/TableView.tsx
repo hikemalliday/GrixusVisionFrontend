@@ -17,6 +17,8 @@ function TableView(): React.JSX.Element {
     searchBarInputPagination,
     characterDropdownSelect,
     setCharactersArray,
+    activeColumn,
+    setActiveColumn,
   } = useItemAndCharacterContext();
 
   const {
@@ -32,7 +34,13 @@ function TableView(): React.JSX.Element {
     action,
     itemNamePagination: searchBarInputPagination,
     charName: characterDropdownSelect,
+    activeColumn,
   });
+
+  // @ts-ignore
+  const handleColClick = (col: string): void => {
+    setActiveColumn(col);
+  };
 
   useEffect(() => {
     if (charNamesResponse.data !== undefined) {
@@ -47,7 +55,13 @@ function TableView(): React.JSX.Element {
         <thead className="col-names">
           <tr>
             {Object.keys(itemsArray[0]).map((key) => (
-              <th key={key}>{key}</th>
+              <th
+                // @ts-ignore
+                onClick={(e) => handleColClick(e.target.innerText)}
+                key={key}
+              >
+                {key}
+              </th>
             ))}
           </tr>
         </thead>

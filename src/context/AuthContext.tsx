@@ -7,7 +7,8 @@ import {
   useState,
 } from "react";
 
-import { expireKey, useLocalStorage } from "../hooks/useLocalStorage";
+// import { expireKey, useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorageContext } from "./LocalStorageContext";
 
 export interface IAuthUser {
   username?: string;
@@ -34,21 +35,24 @@ export const AuthContextProvider = ({
   const [isLoading, setIsLoading] = useState(true);
   const {
     accessToken,
+    clear,
     refreshToken,
     setAccessToken,
     setRefreshToken,
     isTokenExpired,
-    clear,
-  } = useLocalStorage();
+    expireKey,
+  } = useLocalStorageContext();
 
   useEffect(() => {
     if (isTokenExpired(expireKey)) {
+      console.log("isTokenExpired useEffect");
       clear();
       setAuthUser(null);
       setIsLoading(false);
       return;
     }
     if (accessToken && refreshToken) {
+      console.log("AuthContext: access token + refresh token useEffect");
       const userData: IAuthUser = {
         access_token: accessToken,
         refresh_token: refreshToken,
@@ -57,6 +61,7 @@ export const AuthContextProvider = ({
       setIsLoading(false);
       return;
     }
+    console.log("AuthContext: useEffect");
   }, []);
 
   const login = (userData: IAuthUser): void => {

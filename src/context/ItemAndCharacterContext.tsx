@@ -37,6 +37,8 @@ export interface IItemAndCharacterContextType {
   resetItemsArray: CallableFunction;
   dbFile: string;
   setDbFile: React.Dispatch<React.SetStateAction<string>>;
+  activeColumn: string;
+  setActiveColumn: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ItemAndCharacterContext =
@@ -56,6 +58,7 @@ export const ItemAndCharacterProvider = ({
   const [searchBarInputPagination, setSearchBarInputPagination] = useState("");
   const [characterDropdownPagination, setCharacterDropdownPagination] =
     useState("ALL");
+  const [activeColumn, setActiveColumn] = useState("");
 
   const handleQuery = () => {
     setItemsArray(
@@ -99,6 +102,8 @@ export const ItemAndCharacterProvider = ({
         setSearchBarInputPagination,
         characterDropdownPagination,
         setCharacterDropdownPagination,
+        activeColumn,
+        setActiveColumn,
       }}
     >
       {children}
