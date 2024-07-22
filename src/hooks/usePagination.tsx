@@ -26,14 +26,16 @@ interface IPaginatedHookResponse<T> {
   size?: number;
   charName?: string;
   itemNamePagination?: string;
+  activeColumn?: string;
 }
 
 export function usePagination<T>({
   action,
   page = 1,
-  size = 100,
+  size = 25,
   charName = "",
   itemNamePagination = "",
+  activeColumn = "",
 }: IPaginatedHookResponse<T>): IPaginatedHook<T> {
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(page);
@@ -45,7 +47,7 @@ export function usePagination<T>({
 
   useEffect(() => {
     void loadPage(currentPage, currentPageSize);
-  }, [currentPage, setCurrentPage]);
+  }, [currentPage, setCurrentPage, activeColumn]);
 
   // Need to send page 1 in query params when ENTER is pushed for SearchBar
   // charName and itemName are changed when ENTER is hit
@@ -85,6 +87,7 @@ export function usePagination<T>({
         size: pageSize,
         charName,
         itemName: itemNamePagination,
+        activeColumn: activeColumn,
       });
       const {
         data: { results, dbFile, count: resultCount },
