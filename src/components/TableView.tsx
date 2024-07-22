@@ -41,7 +41,8 @@ function TableView(): React.JSX.Element {
   const handleColClick = (col: string): void => {
     setActiveColumn(col);
   };
-
+  // ts-ignore
+  const testci = "";
   useEffect(() => {
     if (charNamesResponse.data !== undefined) {
       const charNames = ["ALL", ...charNamesResponse.data];
