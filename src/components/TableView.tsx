@@ -42,7 +42,7 @@ function TableView(): React.JSX.Element {
     setActiveColumn(col);
   };
   // ts-ignore
-  const testci = "";
+  //const testci = "";
   useEffect(() => {
     if (charNamesResponse.data !== undefined) {
       const charNames = ["ALL", ...charNamesResponse.data];
