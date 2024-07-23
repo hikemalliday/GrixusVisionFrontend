@@ -9,7 +9,7 @@ function Header(): React.JSX.Element {
   const navigate = useNavigate();
   const { logout } = useAuthContext();
   const { resetItemsArray, dbFile } = useItemAndCharacterContext();
-
+  console.log("testci");
   const handleLogout = (): void => {
     logout();
     resetItemsArray();
