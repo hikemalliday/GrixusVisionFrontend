@@ -18,16 +18,16 @@ function Header(): React.JSX.Element {
 
   return (
     <div className="header-container">
-      <div className="logo">
+      <div className="logo-and-logout">
         <Logo />
-      </div>
-      <div
-        className="logout-link"
-        onClick={() => {
-          handleLogout();
-        }}
-      >
-        LOG OUT
+        <div
+          className="logout-link"
+          onClick={() => {
+            handleLogout();
+          }}
+        >
+          LOG OUT
+        </div>
       </div>
       <div className="search-bar">
         <SearchBar />

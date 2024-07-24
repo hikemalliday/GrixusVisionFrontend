@@ -8,6 +8,12 @@ export const signInInputStyles = {
     borderTopRightRadius: "7px",
     width: "500px",
     marginTop: "10px",
+    "@media (max-width: 600px)": {
+      width: "300px",
+    },
+    "@media (max-width: 400px)": {
+      width: "200px",
+    },
   },
   "& .MuiInputLabel-filled": {
     color: "white",
@@ -24,4 +30,10 @@ export const signInButtonStyles = {
   borderTopRightRadius: "7px",
   width: "500px",
   marginTop: "10px",
+  "@media (max-width: 600px)": {
+    width: "300px",
+  },
+  "@media (max-width: 400px)": {
+    width: "200px",
+  },
 };

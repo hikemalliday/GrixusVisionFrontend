@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { signInInputStyles, signInButtonStyles } from "./style";
+import React, { useState, KeyboardEventHandler } from "react";
+import { signInInputStyles, signInButtonStyles } from "./login-button-styles";
 import { Button, TextField, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
 import { useLogin } from "../requests/fetches";
@@ -56,6 +56,14 @@ export function Login(): React.JSX.Element {
     setPassword(event.target.value);
   };
 
+  const handleEnter: KeyboardEventHandler<
+    HTMLTextAreaElement | HTMLInputElement | HTMLDivElement
+  > = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e as unknown as React.FormEvent);
+    }
+  };
+
   return (
     <div className="sign-in-container">
       <Typography
@@ -71,6 +79,7 @@ export function Login(): React.JSX.Element {
         label="username"
         variant="filled"
         onChange={handleUsernameChange}
+        onKeyDown={handleEnter}
       />
       <TextField
         sx={signInInputStyles}
@@ -78,6 +87,7 @@ export function Login(): React.JSX.Element {
         label="password"
         variant="filled"
         onChange={handlePasswordChange}
+        onKeyDown={handleEnter}
       />
       <Button sx={signInButtonStyles} onClick={handleSubmit}>
         SIGN IN
