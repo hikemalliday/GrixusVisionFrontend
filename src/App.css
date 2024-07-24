@@ -40,6 +40,12 @@
   display: flex;
 }
 
+@media (max-width: 231px) {
+  .parse-date {
+    display: none;
+  }
+}
+
 .parse-date {
   justify-content: flex-start;
   margin-left: 5px;
@@ -63,6 +69,12 @@
   user-select: none;
 }
 
+@media (max-width: 231px) {
+  .logout-link {
+    display: none;
+  }
+}
+
 .logout-link:hover {
   color: chartreuse;
 }
@@ -72,6 +84,7 @@
 }
 
 .search-bar {
+  margin-left: 5px;
   margin-top: 20px;
   width: 50%;
 }
@@ -92,6 +105,14 @@
 .table-container td {
   text-align: center;
   min-width: 120px; /* Adjust this value to accommodate your longest column content */
+}
+
+@media (max-width: 767px) {
+  .table-container th,
+  .table-container td {
+    text-align: center;
+    min-width: 75px; /* Adjust this value to accommodate your longest column content */
+  }
 }
 
 .row-even {

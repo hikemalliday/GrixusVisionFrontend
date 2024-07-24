@@ -2,7 +2,7 @@ import "./App.css";
 import { ItemAndCharacterProvider } from "./context/ItemAndCharacterContext";
 import { Login } from "./components/Login";
 import { SignUp } from "./components/SignUp";
-import { ItemsPage } from "./components/ItemsPage";
+import { MainPage } from "./components/MainPage";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
@@ -15,7 +15,7 @@ function App(): React.JSX.Element {
         <ItemAndCharacterProvider>
           <Routes>
             <Route path="/" element={<ProtectedRoute />}>
-              <Route index element={<ItemsPage />} />
+              <Route index element={<MainPage />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />

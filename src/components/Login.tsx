@@ -13,7 +13,6 @@ export function Login(): React.JSX.Element {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([""]);
-  //const { action: tokenAction } = useApiToken();
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
@@ -75,7 +74,7 @@ export function Login(): React.JSX.Element {
       </Typography>
       <TextField
         sx={signInInputStyles}
-        id="filled-basic"
+        id="username"
         label="username"
         variant="filled"
         onChange={handleUsernameChange}
@@ -83,11 +82,12 @@ export function Login(): React.JSX.Element {
       />
       <TextField
         sx={signInInputStyles}
-        id="filled-basic"
+        id="password"
         label="password"
         variant="filled"
         onChange={handlePasswordChange}
         onKeyDown={handleEnter}
+        type="password"
       />
       <Button sx={signInButtonStyles} onClick={handleSubmit}>
         SIGN IN
