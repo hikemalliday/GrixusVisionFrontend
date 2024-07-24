@@ -81,9 +81,7 @@ export const LocalStorageProvider = ({
     if (accessToken && refreshToken) {
       setAccessToken(accessToken);
       setRefreshToken(refreshToken);
-      console.log("localStorageContext: accessToken && refreshToken");
     }
-    console.log("LocalStorageContext: useEffect");
   }, [accessToken, refreshToken]);
 
   return (

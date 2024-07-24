@@ -26,6 +26,24 @@
   left: 0;
   margin: 0;
   text-transform: uppercase;
+  z-index: 2;
+}
+
+.subheader-container {
+  background-color: #101010;
+  position: fixed;
+  width: 100%;
+  top: 52px;
+  left: 0;
+  margin: 0;
+  z-index: 2;
+  display: flex;
+}
+
+.parse-date {
+  justify-content: flex-start;
+  margin-left: 5px;
+  margin-bottom: 3px;
 }
 
 .logo img {
@@ -101,6 +119,7 @@
   align-items: center;
   margin-bottom: 5px;
   margin-top: 3px;
+  z-index: 1;
 }
 /* NOTE: Stylings for 'SignIn.tsx components are in: styles.ts*/
 .sign-in-container {
@@ -121,6 +140,7 @@
 }
 
 .pagination-metadata {
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
 }

@@ -23,7 +23,6 @@ function TableView(): React.JSX.Element {
 
   const {
     data,
-    dbFile,
     count,
     handlePageChangeIncrement,
     handlePageChangeDecrement,
@@ -37,12 +36,10 @@ function TableView(): React.JSX.Element {
     activeColumn,
   });
 
-  // @ts-ignore
   const handleColClick = (col: string): void => {
     setActiveColumn(col);
   };
-  // ts-ignore
-  //const testci = "";
+
   useEffect(() => {
     if (charNamesResponse.data !== undefined) {
       const charNames = ["ALL", ...charNamesResponse.data];
@@ -100,7 +97,6 @@ function TableView(): React.JSX.Element {
   return (
     <>
       <div>
-        {`dbFile: ${dbFile}`}
         <PaginationComponent
           handlePageChangeIncrement={handlePageChangeIncrement}
           handlePageChangeDecrement={handlePageChangeDecrement}

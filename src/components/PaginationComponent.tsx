@@ -18,9 +18,9 @@ export const PaginationComponent = ({
   return (
     <>
       <div className="pagination-metadata">
-        <div>{`count: ${count}`}</div>
+        <div>{`results: ${count}`}</div>
         <div>{`page: ${page}`}</div>
-        <div>{`pageSize: ${pageSize}`}</div>
+        {/* <div>{`pageSize: ${pageSize}`}</div> */}
       </div>
       <div className="page-buttons">
         <Button

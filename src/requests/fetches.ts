@@ -54,3 +54,11 @@ export const useCharNames = (): IUseRequestHook<AxiosResponse> => {
   };
   return useRequest(requestHandler, true);
 };
+
+export const useDbFile = (): IUseRequestHook<AxiosResponse> => {
+  const axiosInstance = useAxiosInstance(API_URL);
+  const requestHandler = async () => {
+    return await axiosInstance.get("/get_db_file");
+  };
+  return useRequest(requestHandler, true);
+};

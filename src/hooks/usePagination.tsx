@@ -5,7 +5,6 @@ interface IPaginatedHook<T> {
   data: T[];
   error: Record<string, unknown>;
   isLoading: boolean;
-  dbFile: string;
   page: number;
   pageCount: number;
   pageSize: number;
@@ -43,7 +42,6 @@ export function usePagination<T>({
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [dbFile, setDbFile] = useState("");
 
   useEffect(() => {
     void loadPage(currentPage, currentPageSize);
@@ -90,11 +88,10 @@ export function usePagination<T>({
         activeColumn: activeColumn,
       });
       const {
-        data: { results, dbFile, count: resultCount },
+        data: { results, count: resultCount },
       } = resp;
       setCount(Number(resultCount));
       setData(results as T[]);
-      setDbFile(dbFile);
     } catch (e) {
       const { message } = e as Error;
       setError({ message });
@@ -120,6 +117,5 @@ export function usePagination<T>({
     handlePageChangeDecrement,
     handlePageSizeChange,
     reload,
-    dbFile,
   };
 }
