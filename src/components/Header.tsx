@@ -8,7 +8,7 @@ import { useItemAndCharacterContext } from "../context/ItemAndCharacterContext";
 function Header(): React.JSX.Element {
   const navigate = useNavigate();
   const { logout } = useAuthContext();
-  const { resetItemsArray, dbFile } = useItemAndCharacterContext();
+  const { resetItemsArray } = useItemAndCharacterContext();
 
   const handleLogout = (): void => {
     logout();
@@ -29,7 +29,6 @@ function Header(): React.JSX.Element {
       >
         LOG OUT
       </div>
-      <div>{dbFile}</div>
       <div className="search-bar">
         <SearchBar />
       </div>
