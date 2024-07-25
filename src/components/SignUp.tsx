@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signInInputStyles, signInButtonStyles } from "./login-button-styles";
+import { signInInputStyles, signInButtonStyles } from "./sx-styles";
 import { Button, TextField, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
 import { useCreateUser } from "../requests/fetches";

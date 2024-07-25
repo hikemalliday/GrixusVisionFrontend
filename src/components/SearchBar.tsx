@@ -19,7 +19,9 @@ function SearchBar(): React.JSX.Element {
         placeholder="Search"
         onChange={(e) => setSearchBarInput(e.target.value)}
         onKeyDown={handleEnter}
-        sx={{ input: { color: "white", padding: "0" } }}
+        sx={{
+          input: { color: "white", padding: "0" },
+        }}
       />
     </>
   );
