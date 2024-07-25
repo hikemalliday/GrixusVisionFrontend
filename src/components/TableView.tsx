@@ -90,7 +90,7 @@ function TableView(): React.JSX.Element {
     return (
       <table className="table-container">
         <tbody>
-          {headers(itemsArray)}
+          {headers()}
           {cells(itemsArray)}
         </tbody>
       </table>
