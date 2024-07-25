@@ -10,6 +10,18 @@ function CharacterDropdown(): React.JSX.Element {
     setCharacterDropdownSelect(charName);
   };
 
+  const labelProps = {
+    sx: {
+      color: "white",
+      padding: 0,
+      margin: 0,
+      "@media (max-width: 300px)": {
+        fontSize: "small",
+        marginLeft: "50px",
+      },
+    },
+  };
+
   React.useEffect(() => {
     const updateLabelText = () => {
       if (window.innerWidth < 300) {
@@ -39,17 +51,7 @@ function CharacterDropdown(): React.JSX.Element {
           {...params}
           label={labelText}
           variant="standard"
-          InputLabelProps={{
-            sx: {
-              color: "white",
-              padding: 0,
-              margin: 0,
-              "@media (max-width: 300px)": {
-                fontSize: "small",
-                marginLeft: "50px",
-              },
-            },
-          }}
+          InputLabelProps={labelProps}
           sx={{
             input: {
               color: "white",

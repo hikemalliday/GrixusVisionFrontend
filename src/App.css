@@ -117,7 +117,7 @@
   .table-container th,
   .table-container td {
     text-align: center;
-    min-width: 75px; /* Adjust this value to accommodate your longest column content */
+    min-width: 60px; /* Adjust this value to accommodate your longest column content */
   }
 }
 
