@@ -62,8 +62,6 @@ function CharacterDropdown(): React.JSX.Element {
               color: "white",
               padding: "0",
               fontSize: "smaller",
-              display: "flex",
-              alignItems: "flex-end",
             },
           }}
         />

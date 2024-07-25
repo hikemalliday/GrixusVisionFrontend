@@ -110,7 +110,7 @@
 .table-container th,
 .table-container td {
   text-align: center;
-  min-width: 120px; /* Adjust this value to accommodate your longest column content */
+  min-width: 120px;
 }
 
 @media (max-width: 500px) {
@@ -123,7 +123,7 @@
   .table-container th,
   .table-container td {
     text-align: center;
-    min-width: 60px; /* Adjust this value to accommodate your longest column content */
+    min-width: 60px;
   }
 }
 
@@ -159,7 +159,7 @@
   margin-top: 3px;
   z-index: 1;
 }
-/* NOTE: Stylings for 'SignIn.tsx components are in: styles.ts*/
+/* NOTE: Stylings for 'LogIn.tsx' components are in: styles.ts*/
 .sign-in-container {
   display: flex;
   flex-direction: column;

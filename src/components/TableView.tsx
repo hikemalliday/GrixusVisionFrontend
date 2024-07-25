@@ -47,28 +47,34 @@ function TableView(): React.JSX.Element {
     }
   }, [isCharNamesLoading]);
 
+  const headersMap = {
+    item: "itemName",
+    name: "charName",
+    count: "itemCount",
+    location: "itemLocation",
+    guild: "charGuild",
+  };
+
   const table = (itemsArray: IItem[]): React.ReactElement => {
-    const headers = (itemsArray: IItem[]) => {
+    const headers = () => {
       return (
-        <thead className="col-names">
-          <tr>
-            {Object.keys(itemsArray[0]).map((key) => (
-              <th
-                // @ts-ignore
-                onClick={(e) => handleColClick(e.target.innerText)}
-                key={key}
-                className={key === "charGuild" ? "charguild" : ""}
-              >
-                {key}
-              </th>
-            ))}
-          </tr>
-        </thead>
+        <tr className="headers">
+          {Object.keys(headersMap).map((key) => (
+            <th
+              // @ts-ignore
+              onClick={(e) => handleColClick(headersMap[e.target.innerText])}
+              key={key}
+              className={key === "guild" ? "charguild" : ""}
+            >
+              {key}
+            </th>
+          ))}
+        </tr>
       );
     };
     const cells = (itemsArray: IItem[]): React.ReactElement => {
       return (
-        <tbody>
+        <>
           {itemsArray.map((item, i) => (
             <tr className={i % 2 == 0 ? "row-even" : "row-odd"} key={i}>
               <td>{item.itemName}</td>
@@ -78,13 +84,15 @@ function TableView(): React.JSX.Element {
               <td className="charguild">{item.charGuild}</td>
             </tr>
           ))}
-        </tbody>
+        </>
       );
     };
     return (
       <table className="table-container">
-        {headers(itemsArray)}
-        {cells(itemsArray)}
+        <tbody>
+          {headers(itemsArray)}
+          {cells(itemsArray)}
+        </tbody>
       </table>
     );
   };
