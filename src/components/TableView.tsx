@@ -57,6 +57,7 @@ function TableView(): React.JSX.Element {
                 // @ts-ignore
                 onClick={(e) => handleColClick(e.target.innerText)}
                 key={key}
+                className={key === "charGuild" ? "charguild" : ""}
               >
                 {key}
               </th>
@@ -74,7 +75,7 @@ function TableView(): React.JSX.Element {
               <td>{item.charName}</td>
               <td>{item.itemCount}</td>
               <td>{item.itemLocation}</td>
-              <td>{item.charGuild}</td>
+              <td className="charguild">{item.charGuild}</td>
             </tr>
           ))}
         </tbody>

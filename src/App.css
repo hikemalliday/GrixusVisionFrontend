@@ -113,6 +113,12 @@
   min-width: 120px; /* Adjust this value to accommodate your longest column content */
 }
 
+@media (max-width: 500px) {
+  .charguild {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   .table-container th,
   .table-container td {
