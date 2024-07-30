@@ -2,6 +2,8 @@
 
 Simple website to display a scrape from the RoTPVP magelo. Itemname + Charname filtering, displays data paginated (dealt with on backend, request made with query params).
 
+This project is live, message me for URL.
+
 Links:
 
 [MageloScraper2](https://github.com/hikemalliday/MageloScraper2)
