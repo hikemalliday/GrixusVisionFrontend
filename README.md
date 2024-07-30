@@ -9,5 +9,4 @@ Links:
 
 Made with reactJS (typescript)
 
-Message me, I'm always looking to network with other devs :)
 
