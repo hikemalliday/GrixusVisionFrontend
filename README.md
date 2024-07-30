@@ -6,7 +6,7 @@ Frontend UI for querying the results of MageloScraper2. Updates every 90 minutes
 
 This project is live, message me for URL.
 
-![ui](https://ibb.co/h20Drhq)
+<a href="https://ibb.co/h20Drhq"><img src="https://i.ibb.co/MPdMKWX/grixusvision.png" alt="grixusvision" border="0" /></a>
 
 Links:
 
