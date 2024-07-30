@@ -1,6 +1,6 @@
 # GrixusVisionFrontend
 
-Simple website to display a scrape from the RoTPVP magelo. Performs single fetch upon page load, all querying is done locally.
+Simple website to display a scrape from the RoTPVP magelo. Itemname + Charname filtering, displays data paginated (dealt with on backend, request made with query params).
 
 Links:
 
