@@ -14,6 +14,8 @@ export function Login(): React.JSX.Element {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([""]);
 
+  console.log("test github action");
+
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
     const newErrors = [];
