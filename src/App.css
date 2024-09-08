@@ -16,6 +16,10 @@
   text-align: center;
 }
 
+.abashi-container {
+  padding: 10px;
+}
+
 .header-container {
   background-color: #222f3e;
   justify-content: space-between;

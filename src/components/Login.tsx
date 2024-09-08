@@ -5,6 +5,7 @@ import { AxiosResponse } from "axios";
 import { useLogin } from "../requests/fetches";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import abashi from "../assets/abashi1.png";
 
 export function Login(): React.JSX.Element {
   const { action } = useLogin();
@@ -13,8 +14,6 @@ export function Login(): React.JSX.Element {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([""]);
-
-  console.log("test github action");
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
@@ -97,6 +96,9 @@ export function Login(): React.JSX.Element {
       {errors.map((error) => (
         <div key={error}>{error}</div>
       ))}
+      <div className="abashi-container">
+        <img src={abashi} />
+      </div>
     </div>
   );
 }
